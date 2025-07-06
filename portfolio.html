@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #333;
+            padding: 15px 0;
+            z-index: 1000;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #00ff88;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea, #eb0a98);
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .hero p {
+            font-size: 1.5em;
+            margin-top: 10px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.3s forwards;
+        }
+
+        /* About Section */
+        .about {
+            padding: 80px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .about p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        /* Skills Section */
+        .skills {
+            padding: 80px 20px;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .skills h2 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .skill-card {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: scale(1.05);
+        }
+
+        .skill-card h3 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        /* Experience Section */
+        .experience {
+            padding: 80px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .experience h2 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+        }
+
+        .experience-item {
+            margin-bottom: 30px;
+            text-align: left;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .experience-item h3 {
+            font-size: 1.5em;
+            color: #333;
+        }
+
+        .experience-item p {
+            font-size: 1.1em;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 80px 20px;
+            background-color: #fff;
+        }
+
+        .projects h2 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .project-card h3 {
+            padding: 15px;
+            font-size: 1.5em;
+        }
+
+        .project-card p {
+            padding: 0 15px 15px;
+            font-size: 1em;
+            color: #666;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 80px 20px;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        .testimonials h2 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-card p {
+            font-size: 1.1em;
+            font-style: italic;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .testimonial-card h4 {
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 80px 20px;
+            text-align: center;
+            background-color: #333;
+            color: white;
+        }
+
+        .contact h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .contact p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .contact a {
+            color: #00ff88;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+
+        .contact a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5em;
+            }
+
+            .hero p {
+                font-size: 1.2em;
+            }
+
+            .navbar ul {
+                gap: 15px;
+            }
+
+            .navbar a {
+                font-size: 1em;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
+        }
+
+        @media (max-width: 600px) {
+            .skills-grid, .project-grid, .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+            .navbar ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .hero h1 {
+                font-size: 2em;
+            }
+            .hero p {
+                font-size: 1em;
+            }
+            .experience-item, .project-card, .testimonial-card {
+                max-width: 100%;
+                margin-left: 0;
+                margin-right: 0;
+            }
+            .project-card img {
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <h1>Hey, I'm Anushka Berlia </h1>
+        <p>Web Developer | UI&UX Designer | Data Sciece | C++ | Java </p>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <h2>About Me</h2>
+        <p>I am a passionate Web Developer with skills in building responsive and dynamic websites. I also have a keen interest in Data Science, where I enjoy analyzing and solving problems using data. I am proficient in programming with C++ and Java, which helps me write efficient and robust code. I’m always eager to learn new technologies and improve my craft.</p>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <h2>My Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-card" data-aos="zoom-in">
+                <h3>HTML</h3>
+                <p>Advanced</p>
+            </div>
+            <div class="skill-card" data-aos="zoom-in" data-aos-delay="100">
+                <h3>CSS</h3>
+                <p>Advanced</p>
+            </div>
+            <div class="skill-card" data-aos="zoom-in" data-aos-delay="200">
+                <h3>JavaScript</h3>
+                <p>Intermediate</p>
+            </div>
+            <div class="skill-card" data-aos="zoom-in" data-aos-delay="300">
+                <h3>React</h3>
+                <p>Intermediate</p>
+            </div>
+            <div class="skill-card" data-aos="zoom-in" data-aos-delay="400">
+                <h3>GSAP</h3>
+                <p>Beginner</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience">
+        <h2>My Experience</h2>
+        <div class="experience-item" data-aos="fade-up">
+            <h3>Frontend Developer - Tech Corp</h3>
+            <p>Jan 2023 - Present</p>
+            <p>Developed responsive web applications using React and TypeScript, improving user engagement by 30%.</p>
+        </div>
+        <div class="experience-item" data-aos="fade-up" data-aos-delay="100">
+            <h3>Web Designer - Creative Studio</h3>
+            <p>Jun 2021 - Dec 2022</p>
+            <p>Designed UI/UX for client websites, focusing on modern aesthetics and accessibility standards.</p>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <h2>My Projects</h2>
+        <div class="project-grid">
+            <div class="project-card" data-aos="fade-up">
+                <img src="project1.jpg" alt="Project 1">
+                <h3>Project One</h3>
+                <p>A responsive e-commerce website built with HTML, CSS, and JavaScript.</p>
+            </div>
+            <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                <img src="project2.jpeg" alt="Project 2">
+                <h3>Project Two</h3>
+                <p>An interactive dashboard using React and Chart.js.</p>
+            </div>
+            <!-- <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                <img src="PLACE5.jpg" alt="Project 3">
+                <h3>Project Three</h3>
+                <p>A portfolio website with advanced animations using GSAP.</p>
+            </div> -->
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <h2>Testimonials</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card" data-aos="fade-up">
+                <p>"Amazing work! The website was delivered on time and exceeded expectations."</p>
+                <h4>John Doe, CEO of Tech Solutions</h4>
+            </div>
+            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                <p>"The animations and design were top-notch. Highly recommend!"</p>
+                <h4>Jane Smith, Marketing Director</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2>Contact Me</h2>
+        <p>Interested in working together? Feel free to reach out!</p>
+        <div class="contact-icons">
+            <a href="mailto:anushkaberlia@gmail.com"><img src="https://img.icons8.com/material-outlined/23/000000/email.png" alt="Email Icon"> Mail</a>
+            <a href="https://www.linkedin.com/in/anushka-berlia-691587287/" target="_blank"><img src="https://img.icons8.com/material-outlined/23/000000/linkedin.png" alt="LinkedIn Icon"> LinkedIn</a>
+        </div>
+    </section>
+
+    <!-- GSAP and AOS Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Initialize AOS for scroll animations
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+        // GSAP Navbar Animation
+        gsap.from(".navbar", {
+            duration: 1,
+            y: -50,
+            opacity: 0,
+            ease: "power2.out"
+        });
+
+        // GSAP Skills Animation
+        gsap.from(".skill-card", {
+            scrollTrigger: {
+                trigger: ".skills",
+                start: "top 80%"
+            },
+            duration: 0.8,
+            scale: 0.8,
+            opacity: 0,
+            stagger: 0.2,
+            ease: "back.out(1.7)"
+        });
+
+        // Smooth Scroll for Navbar Links
+        document.querySelectorAll('.navbar a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
